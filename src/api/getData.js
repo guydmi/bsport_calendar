@@ -4,8 +4,10 @@ const api = "https://api.staging.bsport.io/api/v1"
 const headers = {Authorization: "Token f18688960a8942c83d238b04e88389ac126bf55c"}
 
 const getCardData = async (date) => {
+    var endDate = new Date(date);
+    endDate.setDate(endDate.getDate()+1);
     async function getOffers() {
-        const res = await axios.get(api+'/offer', {params: { company: 6, min_date: date, max_date: date }, headers})
+        const res = await axios.get(api+'/offer', {params: { company: 6, min_date: date.substring(0,10), max_date: endDate.toISOString().substring(0,10)}, headers})
         return res.data.results
     }
     const offer = await getOffers()
