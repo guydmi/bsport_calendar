@@ -39,6 +39,7 @@ const getCardData = async (date) => {
         obj.duration = off.duration_minute
         obj.coach = coach.find(c => c.id === off.coach).user
         obj.name = activities.find(a => a.id === off.meta_activity).name
+        obj.color = off.meta_activity_color
         cards.push(obj)
     })
 

@@ -1,46 +1,46 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 
 
 export default function OfferCard(props) {
-    const timeWidth = props.duration * 20
+    const timeHeight = props.cardData.duration * 3
+    const delay = props.cardData.min_start * 0.3
+    const color = props.cardData.meta_activity_color
   return (
-    <Card sx={{ width: timeWidth }}>
+    <Card sx={{ height: timeHeight, mt: delay, width: 600, bgcolor: color}} style={{overflow:'scroll', backgroundColor: color}}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {props.location}
+          {props.cardData.location}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {props.name}
+          {props.cardData.name}
         </Typography>
         <Typography variant="body2">
-          {props.duration}, {props.startTime}:{props.endTime}
+          duree: {props.cardData.duration}, debut: {props.cardData.hour_start} : {props.cardData.min_start}
         </Typography>
         <div>
-            <Typography>{props.coach.name}</Typography>
-            <Typography>{props.coach.img}</Typography>
+            <Typography>{props.cardData.coach.name}</Typography>
+            <img src={props.cardData.coach.photo} alt="" width="100" height="100" />
         </div>
       </CardContent>
-      <CardActions>
-        <Button size="small">See participant</Button>
-      </CardActions>
     </Card>
   );
 }
 
 OfferCard.propTypes = {
-    duration: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    startTime: PropTypes.string,
-    endTime: PropTypes.strimg,
-    coach: PropTypes.shape({
-        name: PropTypes.name,
-        img: PropTypes.string
-    }),
-    location: PropTypes.string
+    cardData: PropTypes.shape({
+        duration: PropTypes.number,
+        name: PropTypes.string,
+        hour_start: PropTypes.number,
+        min_start: PropTypes.number,
+        coach: PropTypes.shape({
+            name: PropTypes.string,
+            photo: PropTypes.string
+        }),
+        location: PropTypes.string,
+        meta_activity_color: PropTypes.string
+    })
 }
