@@ -16,7 +16,7 @@ export default function Schedule(props) {
         }
         fetchData()
     }, [date])
-    console.log(cardData)
+    console.log(props.date)
 
     
 
